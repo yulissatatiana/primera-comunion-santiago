@@ -4,53 +4,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Primera Comunión de Santiago Andrés</title>
+<title>Mi Primera Comunión - Santiago Andrés</title>
 
 <style>
 :root {
-  --dorado: #b99a54;
-  --texto: #65563d;
-  --crema: #fffaf0;
+  --gold: #b99a54;
+  --ink: #65563d;
+  --cream: #fffaf0;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  color: var(--texto);
+  color: var(--ink);
+  font-family: Georgia, serif;
   background: #f8f0dc url("assets/fondo-comunion.png")
-              center top / cover fixed no-repeat;
+    center / cover fixed no-repeat;
 }
 
-section {
-  padding: 65px 18px;
+.screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
 }
 
-.contenedor {
-  max-width: 820px;
-  margin: auto;
-}
-
-.panel {
-  background: rgba(255, 250, 240, 0.85);
+.glass {
+  background: rgba(255,251,242,.88);
   border: 1px solid #c9b579;
-  box-shadow: 0 12px 40px #6c57221a;
+  box-shadow: 0 15px 48px #6c57221c;
   text-align: center;
-  padding: clamp(25px, 6vw, 55px);
 }
 
-.etiqueta {
-  font: 11px Arial, sans-serif;
+.eyebrow {
+  font: 11px Arial;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #927943;
+}
+
+.ornament {
+  font-size: 32px;
+  color: var(--gold);
+  margin: 15px;
 }
 
 h1, h2, h3 {
@@ -59,14 +58,12 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: clamp(40px, 8vw, 72px);
+  font-size: clamp(43px, 9vw, 76px);
   line-height: 1.05;
-  margin: 15px 0;
 }
 
 h2 {
-  font-size: clamp(27px, 5vw, 42px);
-  margin: 12px 0 20px;
+  font-size: clamp(28px, 5vw, 43px);
 }
 
 p {
@@ -74,91 +71,214 @@ p {
   line-height: 1.8;
 }
 
-.ornamento {
-  font-size: 32px;
-  color: var(--dorado);
-  margin: 15px;
-}
-
-.linea {
+.line {
   height: 1px;
-  width: 95px;
-  background: var(--dorado);
-  margin: 24px auto;
+  width: 90px;
+  background: var(--gold);
+  margin: 22px auto;
 }
 
-.boton {
+.btn {
   display: inline-block;
+  border: 1px solid #8b7440;
   background: #8b7440;
   color: white;
-  padding: 14px 24px;
+  padding: 14px 25px;
   text-decoration: none;
-  font: 11px Arial, sans-serif;
+  font: 11px Arial;
   letter-spacing: 2px;
   text-transform: uppercase;
-  border: none;
   cursor: pointer;
   margin-top: 15px;
 }
 
-.portada {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 25px;
+.btn:hover {
+  background: #6f5b32;
 }
 
-.portada-contenido {
-  max-width: 680px;
-  width: 100%;
-  margin: auto;
-  background: rgba(255, 250, 240, 0.88);
-  border: 1px solid #c9b579;
-  outline: 1px solid #c9b57966;
-  outline-offset: 7px;
+.hidden {
+  display: none !important;
+}
+
+/* SOBRE */
+
+.envelope-wrap {
+  width: min(540px, 94vw);
   text-align: center;
-  padding: 45px 25px;
+}
+
+.envelope-title {
+  font-size: clamp(34px, 7vw, 54px);
+  margin: 18px 0 24px;
+  color: #80683b;
+}
+
+.envelope {
+  position: relative;
+  width: min(390px, 82vw);
+  height: 250px;
+  margin: auto;
+  cursor: pointer;
+  filter: drop-shadow(0 15px 18px #705d3024);
+}
+
+.env-body {
+  position: absolute;
+  inset: 35px 0 0;
+  background: linear-gradient(145deg,#fffdf5,#eee1bd);
+  border: 1px solid #c4ad70;
+}
+
+.env-body:before,
+.env-body:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.env-body:before {
+  left: 0;
+  border-width: 0 195px 135px 0;
+  border-color: transparent transparent #e6d6aa transparent;
+}
+
+.env-body:after {
+  right: 0;
+  border-width: 0 0 135px 195px;
+  border-color: transparent transparent #f0e4c5 transparent;
+}
+
+.env-flap {
+  position: absolute;
+  z-index: 3;
+  top: 35px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 195px solid transparent;
+  border-right: 195px solid transparent;
+  border-top: 145px solid #d9c38a;
+  transform-origin: top;
+  transition: transform .9s ease;
+}
+
+.env-label {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  top: 80px;
+  font-size: 28px;
+  color: #786238;
+  line-height: 1.3;
+}
+
+.seal {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 122px;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #a98b4a;
+  color: white;
+  display: grid;
+  place-items: center;
+  border: 2px solid #e8d8aa;
+  font-size: 25px;
+  transition: opacity .3s;
+}
+
+.envelope.open .env-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .seal {
+  opacity: 0;
+}
+
+.hint {
+  font: 11px Arial;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #927943;
+  margin-top: 25px;
+}
+
+/* BOTÓN DE MÚSICA */
+
+.music {
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  z-index: 10;
+  border: 1px solid var(--gold);
+  background: #fffaf0ed;
+  color: #80683b;
+  border-radius: 30px;
+  padding: 12px 16px;
+  font: 11px Arial;
+  cursor: pointer;
+}
+
+/* CONTENIDO */
+
+.panel {
+  width: min(830px, 100%);
+  padding: clamp(28px, 6vw, 58px);
+  margin: auto;
 }
 
 .hero {
-  min-height: 80vh;
+  min-height: 85vh;
   display: grid;
   place-items: center;
+  padding: 55px 16px;
 }
 
-.fecha {
-  font: 12px Arial, sans-serif;
+.date {
+  font: 12px Arial;
   letter-spacing: 2px;
-  margin: 25px 0;
+  color: #927943;
+  margin: 24px 0;
 }
 
-.dos-columnas {
+section.content {
+  padding: 55px 16px;
+}
+
+.two {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
-  margin: 25px 0;
+  margin: 28px 0;
 }
 
-.detalle {
+.detail {
   padding: 22px 12px;
   border-top: 1px solid #c9b579;
   border-bottom: 1px solid #c9b579;
 }
 
-.detalle strong {
+.detail strong {
   display: block;
-  font: 11px Arial, sans-serif;
+  font: 11px Arial;
   letter-spacing: 2px;
   color: #927943;
   margin-bottom: 12px;
 }
 
-.detalle p {
-  margin: 0;
+.detail p {
   font-size: 16px;
 }
 
-.cuenta {
+.countdown {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -166,54 +286,54 @@ p {
   margin: 25px 0;
 }
 
-.unidad {
+.unit {
   min-width: 72px;
-  padding: 12px;
+  padding: 13px 9px;
   border: 1px solid #d2c18f;
   background: #fffaf0;
 }
 
-.unidad b {
+.unit b {
   display: block;
   font-size: 28px;
   font-weight: normal;
   color: #8a713c;
 }
 
-.unidad small {
-  font: 10px Arial, sans-serif;
+.unit small {
+  font: 10px Arial;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-.padres span {
+.parents span {
   display: block;
   font-size: 18px;
-  line-height: 1.8;
+  line-height: 1.9;
 }
 
 footer {
   text-align: center;
-  padding: 35px 15px;
-  font-size: 13px;
+  padding: 35px 16px;
   color: #8c7749;
 }
 
-@media (max-width: 560px) {
-  .dos-columnas {
+@media(max-width:560px) {
+  .two {
     grid-template-columns: 1fr;
   }
 
-  section {
-    padding: 40px 13px;
+  .env-flap {
+    border-left-width: 41vw;
+    border-right-width: 41vw;
   }
 
-  .panel {
-    padding: 27px 19px;
+  .env-body:before {
+    border-width: 0 41vw 120px 0;
   }
 
-  .unidad {
-    min-width: 65px;
+  .env-body:after {
+    border-width: 0 0 120px 41vw;
   }
 }
 </style>
@@ -221,247 +341,418 @@ footer {
 
 <body>
 
-<!-- PORTADA -->
-<section class="portada" id="portada">
-  <div class="portada-contenido">
+<!-- CANCIÓN -->
+<audio id="song" src="assets/musica.mp3" preload="none" loop></audio>
 
-    <div class="ornamento">✧</div>
+<button class="music" id="musicBtn">
+  ▶ Reproducir música
+</button>
 
-    <div class="etiqueta">
-      Una bendición para compartir
+<!-- PRIMERA PANTALLA: SOBRE -->
+
+<section class="screen" id="envelopeScreen">
+
+  <div class="envelope-wrap">
+
+    <div class="eyebrow">Una invitación especial</div>
+
+    <div class="ornament">✧</div>
+
+    <div class="envelope-title">
+      Con cariño para ti
     </div>
 
-    <h2>Mi Primera Comunión</h2>
+    <div class="envelope" id="envelope"
+         role="button" tabindex="0">
 
-    <h1>
-      Santiago Andrés<br>
-      Ortega Lozano
-    </h1>
+      <div class="env-body"></div>
 
-    <div class="linea"></div>
+      <div class="env-label">
+        Mi Primera<br>Comunión
+      </div>
 
-    <p>
-      Con alegría y gratitud, te invitamos a ser parte
-      de un día lleno de fe, amor y bendiciones.
-    </p>
+      <div class="env-flap"></div>
 
-    <button class="boton"
-      onclick="document.getElementById('inicio').scrollIntoView({behavior:'smooth'})">
-      Abrir invitación
-    </button>
+      <div class="seal">✧</div>
+
+    </div>
+
+    <div class="hint">
+      Toca el sobre para abrir tu invitación
+    </div>
 
   </div>
+
 </section>
 
-<!-- PRESENTACIÓN -->
-<section class="hero" id="inicio">
-  <div class="panel contenedor">
+<!-- SEGUNDA PANTALLA: SANTIAGO ANDRÉS -->
 
-    <div class="etiqueta">Un encuentro con Jesús</div>
+<section class="screen hidden" id="nameScreen">
 
-    <div class="ornamento">✧</div>
+  <div class="glass panel">
+
+    <div class="eyebrow">Con la bendición de Dios</div>
+
+    <div class="ornament">✧</div>
+
+    <div class="eyebrow">Celebro con alegría</div>
 
     <h1>Santiago Andrés</h1>
 
-    <h2>Mi Primera Comunión</h2>
+    <h2>Ortega Lozano</h2>
 
-    <div class="fecha">
-      MARTES · 8 DE DICIEMBRE · 2026
-    </div>
-
-    <div class="etiqueta">
-      Desliza para descubrir ↓
-    </div>
-
-  </div>
-</section>
-
-<!-- MENSAJE Y PADRES -->
-<section>
-  <div class="panel contenedor">
-
-    <div class="etiqueta">Con mucho amor</div>
-
-    <h2>Un momento especial</h2>
+    <div class="line"></div>
 
     <p>
-      Le doy gracias a Dios por permitirme recibir
-      por primera vez a Jesús en la Sagrada Eucaristía.
-      Mi corazón se llena de alegría al compartir este
-      día tan importante con las personas que quiero.
+      Me llena de ilusión compartir contigo
+      este encuentro tan especial con Jesús.
     </p>
 
-    <p>
-      Mis padres,
-      <strong>Carlos Andrés Ortega Lozano</strong> y
-      <strong>Yulissa Tatiana Lozano Manosalva</strong>,
-      junto conmigo, te invitamos a acompañarnos
-      en esta celebración de fe y amor.
-    </p>
-
-    <div class="linea"></div>
-
-    <div class="etiqueta">La cuenta regresiva</div>
-
-    <h2>Falta muy poco</h2>
-
-    <div class="cuenta" id="cuenta">
-      Cargando cuenta regresiva...
-    </div>
+    <button class="btn" id="showInvite">
+      Ver invitación
+    </button>
 
   </div>
+
 </section>
 
-<!-- DETALLES -->
-<section>
-  <div class="panel contenedor">
+<!-- RESTO DE LA INVITACIÓN -->
 
-    <div class="etiqueta">El gran día</div>
+<main id="invitation" class="hidden">
 
-    <h2>Te esperamos</h2>
+  <section class="hero">
 
-    <div class="dos-columnas">
+    <div class="glass panel">
 
-      <div class="detalle">
-        <strong>Santa Eucaristía</strong>
+      <div class="eyebrow">Un encuentro con Jesús</div>
 
-        <p>
-          Martes, 8 de diciembre de 2026<br>
-          10:00 a. m.
-        </p>
+      <div class="ornament">✧</div>
 
-        <p>
-          Parroquia Nuestra Señora del Rosario<br>
-          Río de Oro
-        </p>
+      <h1>Mi Primera<br>Comunión</h1>
+
+      <h2>Santiago Andrés Ortega Lozano</h2>
+
+      <div class="date">
+        MARTES · 8 DE DICIEMBRE · 2026
       </div>
 
-      <div class="detalle">
-        <strong>Recepción</strong>
+      <p>
+        Con mucha alegría en mi corazón,
+        quiero compartir contigo el día en que
+        recibiré por primera vez a Jesús en la
+        Sagrada Eucaristía. Será una dicha contar
+        con tu presencia y tus oraciones.
+      </p>
 
-        <p>
-          Martes, 8 de diciembre de 2026<br>
-          4:00 p. m.
-        </p>
+      <div class="line"></div>
 
-        <p>
-          Será un gusto compartir
-          este día contigo.
-        </p>
+      <div class="eyebrow">Cuenta regresiva</div>
+
+      <div class="countdown" id="countdown"></div>
+
+    </div>
+
+  </section>
+
+  <!-- EVENTO -->
+
+  <section class="content">
+
+    <div class="glass panel">
+
+      <div class="eyebrow">El gran día</div>
+
+      <h2>La celebración</h2>
+
+      <div class="two">
+
+        <div class="detail">
+
+          <strong>Santa Eucaristía</strong>
+
+          <p>Martes, 8 de diciembre de 2026</p>
+
+          <p><b>10:00 a. m.</b></p>
+
+          <p>
+            Parroquia Nuestra Señora del Rosario<br>
+            Río de Oro
+          </p>
+
+        </div>
+
+        <div class="detail">
+
+          <strong>Recepción</strong>
+
+          <p>Martes, 8 de diciembre de 2026</p>
+
+          <p><b>4:00 p. m.</b></p>
+
+          <p>
+            Será un gusto compartir
+            este día contigo.
+          </p>
+
+        </div>
+
       </div>
 
     </div>
 
-    <div class="linea"></div>
+  </section>
 
-    <div class="etiqueta">Con cariño</div>
+  <!-- PADRES -->
 
-    <h3>Sus padres</h3>
+  <section class="content">
 
-    <div class="padres">
-      <span>Carlos Andrés Ortega Lozano</span>
-      <span>Yulissa Tatiana Lozano Manosalva</span>
+    <div class="glass panel">
+
+      <div class="eyebrow">Con amor y gratitud</div>
+
+      <div class="ornament">✧</div>
+
+      <h2>Mis padres</h2>
+
+      <p>
+        Quienes acompañan con amor y alegría
+        este paso tan importante en mi vida:
+      </p>
+
+      <div class="parents">
+
+        <span>Carlos Andrés Ortega Lozano</span>
+
+        <span>Yulissa Tatiana Lozano Manosalva</span>
+
+      </div>
+
+      <div class="line"></div>
+
+      <p>
+        «Dejen que los niños se acerquen a mí».<br>
+        <i>Marcos 10, 14</i>
+      </p>
+
     </div>
 
-  </div>
-</section>
+  </section>
 
-<!-- CONFIRMAR ASISTENCIA -->
-<section>
-  <div class="panel contenedor">
+  <!-- CONFIRMAR ASISTENCIA -->
 
-    <div class="etiqueta">Confirmar asistencia</div>
+  <section class="content">
 
-    <h2>Tu presencia es muy especial</h2>
+    <div class="glass panel">
+
+      <div class="eyebrow">Confirmar asistencia</div>
+
+      <h2>Tu presencia es muy especial</h2>
+
+      <p>
+        Para una mejor organización y por consideración
+        a la logística de la celebración, agradecemos
+        confirmar tu asistencia a más tardar el
+        <b>30 de noviembre de 2026</b>.
+      </p>
+
+      <p>
+        Tu confirmación nos permitirá preparar
+        cada detalle con el cariño que esta ocasión merece.
+      </p>
+
+      <p>
+        Gracias por acompañarme en este hermoso
+        encuentro con Jesús.
+      </p>
+
+      <a class="btn" id="whatsapp"
+         target="_blank" rel="noopener">
+        Confirmar por WhatsApp
+      </a>
+
+    </div>
+
+  </section>
+
+  <footer>
+
+    <div class="ornament">✧</div>
+
+    Santiago Andrés Ortega Lozano<br>
+    8 de diciembre de 2026
 
     <p>
-      Para una mejor organización y por consideración
-      a la logística de la celebración, agradecemos
-      confirmar tu asistencia a más tardar el
-      <strong>30 de noviembre de 2026</strong>.
+      Con la bendición de Dios y el amor de nuestra familia.
     </p>
 
-    <p>
-      Tu confirmación nos permitirá preparar cada
-      detalle con el cariño que esta ocasión merece.
-    </p>
-
-    <p>
-      Gracias por acompañar a Santiago Andrés
-      en este hermoso encuentro con Jesús.
-    </p>
-
-    <a class="boton"
-       id="whatsapp"
-       target="_blank"
-       rel="noopener">
-      Confirmar por WhatsApp
+    <a href="#envelopeScreen" style="color:inherit">
+      Volver al inicio ↑
     </a>
 
-  </div>
-</section>
+  </footer>
 
-<footer>
-  <div class="ornamento">✧</div>
-
-  Santiago Andrés Ortega Lozano<br>
-  8 de diciembre de 2026
-
-  <p>
-    Con la bendición de Dios y el amor de nuestra familia
-  </p>
-
-  <a href="#portada" style="color:inherit">
-    Volver al inicio ↑
-  </a>
-</footer>
+</main>
 
 <script>
-// Cuenta regresiva: fecha y hora de Colombia
-const fechaEvento =
-  new Date("2026-12-08T10:00:00-05:00").getTime();
 
-const cuenta = document.getElementById("cuenta");
+// ABRIR SOBRE
 
-function actualizarCuenta() {
-  const ahora = Date.now();
-  const diferencia = fechaEvento - ahora;
+const envelope = document.getElementById("envelope");
 
-  if (diferencia <= 0) {
-    cuenta.innerHTML = "<p>¡Hoy es el gran día!</p>";
-    return;
-  }
+const envelopeScreen =
+  document.getElementById("envelopeScreen");
 
-  const dias = Math.floor(diferencia / 86400000);
-  const horas = Math.floor((diferencia % 86400000) / 3600000);
-  const minutos = Math.floor((diferencia % 3600000) / 60000);
-  const segundos = Math.floor((diferencia % 60000) / 1000);
+const nameScreen =
+  document.getElementById("nameScreen");
 
-  const valores = [dias, horas, minutos, segundos];
-  const nombres = ["Días", "Horas", "Minutos", "Segundos"];
+const invitation =
+  document.getElementById("invitation");
 
-  cuenta.innerHTML = valores.map((valor, i) => `
-    <div class="unidad">
-      <b>${String(valor).padStart(2, "0")}</b>
-      <small>${nombres[i]}</small>
-    </div>
-  `).join("");
+function openEnvelope() {
+
+  if (envelope.classList.contains("open")) return;
+
+  envelope.classList.add("open");
+
+  setTimeout(() => {
+
+    envelopeScreen.classList.add("hidden");
+
+    nameScreen.classList.remove("hidden");
+
+    nameScreen.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }, 850);
+
 }
 
-actualizarCuenta();
-setInterval(actualizarCuenta, 1000);
+envelope.addEventListener("click", openEnvelope);
 
-// Confirmación por WhatsApp
-const numero = "573102127312";
+envelope.addEventListener("keydown", e => {
 
-const mensaje =
-  "¡Hola! Confirmo mi asistencia a la Primera Comunión " +
-  "de Santiago Andrés Ortega Lozano, el 8 de diciembre " +
-  "de 2026. Nombre(s) de los asistentes: ";
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    openEnvelope();
+  }
+
+});
+
+// MOSTRAR INVITACIÓN
+
+document.getElementById("showInvite")
+.addEventListener("click", () => {
+
+  nameScreen.classList.add("hidden");
+
+  invitation.classList.remove("hidden");
+
+  invitation.scrollIntoView({
+    behavior: "smooth"
+  });
+
+});
+
+// REPRODUCIR Y PAUSAR MÚSICA
+
+const song = document.getElementById("song");
+
+const musicBtn = document.getElementById("musicBtn");
+
+musicBtn.addEventListener("click", async () => {
+
+  if (song.paused) {
+
+    try {
+
+      await song.play();
+
+      musicBtn.textContent = "Ⅱ Pausar música";
+
+    } catch (error) {
+
+      musicBtn.textContent = "No se pudo reproducir";
+
+    }
+
+  } else {
+
+    song.pause();
+
+    musicBtn.textContent = "▶ Reproducir música";
+
+  }
+
+});
+
+// CUENTA REGRESIVA
+
+const eventDate =
+  new Date("2026-12-08T10:00:00-05:00").getTime();
+
+const countdown =
+  document.getElementById("countdown");
+
+function updateCountdown() {
+
+  const diff = eventDate - Date.now();
+
+  if (diff <= 0) {
+
+    countdown.innerHTML =
+      "<p>¡Hoy es el gran día!</p>";
+
+    return;
+
+  }
+
+  const values = [
+
+    Math.floor(diff / 86400000),
+
+    Math.floor(diff % 86400000 / 3600000),
+
+    Math.floor(diff % 3600000 / 60000),
+
+    Math.floor(diff % 60000 / 1000)
+
+  ];
+
+  const labels = [
+    "Días",
+    "Horas",
+    "Minutos",
+    "Segundos"
+  ];
+
+  countdown.innerHTML = values.map((value, i) => `
+
+    <div class="unit">
+
+      <b>${String(value).padStart(2, "0")}</b>
+
+      <small>${labels[i]}</small>
+
+    </div>
+
+  `).join("");
+
+}
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
+// WHATSAPP
+
+const message =
+  "¡Hola! Confirmo mi asistencia a la Primera Comunión de Santiago Andrés Ortega Lozano, el 8 de diciembre de 2026. Nombre(s) de los asistentes: ";
 
 document.getElementById("whatsapp").href =
-  "https://wa.me/" + numero +
-  "?text=" + encodeURIComponent(mensaje);
+  "https://wa.me/573102127312?text=" +
+  encodeURIComponent(message);
+
 </script>
 
 </body>
