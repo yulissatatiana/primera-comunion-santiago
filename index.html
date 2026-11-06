@@ -7,515 +7,760 @@
 <title>Mi Primera Comunión - Santiago Andrés</title>
 
 <style>
-/* =========================
-   ESTILOS GENERALES
-========================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+  --gold: #b99a54;
+  --ink: #65563d;
+  --cream: #fffaf0;
 }
 
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
 body {
-    font-family: Georgia, 'Times New Roman', serif;
-    color: #5c4b36;
-    background: #f8f3e9;
-    text-align: center;
+  margin: 0;
+  color: var(--ink);
+  font-family: Georgia, serif;
+  background: #f8f0dc url("assets/fondo-comunion.png")
+    center / cover fixed no-repeat;
 }
 
 .screen {
-    min-height: 100vh;
-    width: 100%;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 30px 18px;
-    background-image: linear-gradient(
-        rgba(255,255,255,0.48),
-        rgba(255,255,255,0.48)
-    ), url("assets/fondo-comunion.png");
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
 }
 
-.screen.active {
-    display: flex;
+.glass {
+  background: rgba(255,251,242,.88);
+  border: 1px solid #c9b579;
+  box-shadow: 0 15px 48px #6c57221c;
+  text-align: center;
 }
 
-/* =========================
-   SOBRE DE INVITACIÓN
-========================= */
+.eyebrow {
+  font: 11px Arial;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #927943;
+}
+
+.ornament {
+  font-size: 32px;
+  color: var(--gold);
+  margin: 15px;
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+  color: #80683b;
+}
+
+h1 {
+  font-size: clamp(43px, 9vw, 76px);
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(28px, 5vw, 43px);
+}
+
+p {
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.line {
+  height: 1px;
+  width: 90px;
+  background: var(--gold);
+  margin: 22px auto;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid #8b7440;
+  background: #8b7440;
+  color: white;
+  padding: 14px 25px;
+  text-decoration: none;
+  font: 11px Arial;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.btn:hover {
+  background: #6f5b32;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* SOBRE */
+
+.envelope-wrap {
+  width: min(540px, 94vw);
+  text-align: center;
+}
+
+.envelope-title {
+  font-size: clamp(34px, 7vw, 54px);
+  margin: 18px 0 24px;
+  color: #80683b;
+}
 
 .envelope {
-    width: min(340px, 85vw);
-    min-height: 220px;
-    background: #e9d8b8;
-    border: 2px solid #bd9b62;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 25px;
-    transition: transform 0.3s;
+  position: relative;
+  width: min(390px, 82vw);
+  height: 250px;
+  margin: auto;
+  cursor: pointer;
+  filter: drop-shadow(0 15px 18px #705d3024);
 }
 
-.envelope:hover {
-    transform: scale(1.04);
+.env-body {
+  position: absolute;
+  inset: 35px 0 0;
+  background: linear-gradient(145deg,#fffdf5,#eee1bd);
+  border: 1px solid #c4ad70;
 }
 
-.envelope h1 {
-    color: #8b6a36;
-    font-size: 30px;
-    font-weight: normal;
-    margin-bottom: 15px;
+.env-body:before,
+.env-body:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
 }
 
-.envelope p {
-    font-size: 15px;
-    color: #755b36;
+.env-body:before {
+  left: 0;
+  border-width: 0 195px 135px 0;
+  border-color: transparent transparent #e6d6aa transparent;
 }
 
-.open-text {
-    margin-top: 20px;
-    font-size: 13px;
-    color: #8b6a36;
-    letter-spacing: 2px;
+.env-body:after {
+  right: 0;
+  border-width: 0 0 135px 195px;
+  border-color: transparent transparent #f0e4c5 transparent;
 }
 
-/* =========================
-   NOMBRE DE SANTIAGO
-========================= */
-
-.name-card {
-    width: min(520px, 95%);
-    padding: 35px 20px;
-    background: rgba(255,255,255,0.78);
-    border: 1px solid #c5a66c;
-    border-radius: 14px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+.env-flap {
+  position: absolute;
+  z-index: 3;
+  top: 35px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 195px solid transparent;
+  border-right: 195px solid transparent;
+  border-top: 145px solid #d9c38a;
+  transform-origin: top;
+  transition: transform .9s ease;
 }
 
-.name-card .small-title {
-    font-size: 17px;
-    letter-spacing: 4px;
-    color: #a48650;
-    margin-bottom: 18px;
+.env-label {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  top: 80px;
+  font-size: 28px;
+  color: #786238;
+  line-height: 1.3;
 }
 
-.name-card h1 {
-    font-size: clamp(38px, 8vw, 58px);
-    color: #96713c;
-    font-weight: normal;
-    margin-bottom: 8px;
+.seal {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 122px;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #a98b4a;
+  color: white;
+  display: grid;
+  place-items: center;
+  border: 2px solid #e8d8aa;
+  font-size: 25px;
+  transition: opacity .3s;
 }
 
-.name-card h2 {
-    font-size: 24px;
-    color: #80613a;
-    font-weight: normal;
+.envelope.open .env-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
 }
 
-/* =========================
-   BOTÓN DE MÚSICA
-========================= */
-
-.music-container {
-    display: flex;
-    justify-content: center;
-    margin: 28px auto 22px;
+.envelope.open .seal {
+  opacity: 0;
 }
 
-.music-button {
-    background: linear-gradient(135deg, #a98243, #d9bd7d);
-    color: white;
-    border: 2px solid #fff;
-    border-radius: 35px;
-    padding: 14px 30px;
-    font-family: Georgia, serif;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(91, 65, 26, 0.3);
-    transition: transform 0.2s, box-shadow 0.2s;
+.hint {
+  font: 11px Arial;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #927943;
+  margin-top: 25px;
 }
 
-.music-button:hover {
-    transform: scale(1.06);
-    box-shadow: 0 7px 18px rgba(91, 65, 26, 0.4);
+/* BOTÓN DE MÚSICA: AHORA DEBAJO DEL NOMBRE */
+
+.music {
+  display: block;
+  position: relative;
+  z-index: 10;
+  margin: 24px auto 0;
+  border: 1px solid var(--gold);
+  background: #8b7440;
+  color: white;
+  border-radius: 30px;
+  padding: 14px 24px;
+  font: 12px Arial;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px #6c572233;
+  transition: background .2s, transform .2s;
 }
 
-.music-button:active {
-    transform: scale(0.97);
+.music:hover {
+  background: #6f5b32;
+  transform: translateY(-2px);
 }
 
-/* =========================
-   BOTONES DE NAVEGACIÓN
-========================= */
+/* CONTENIDO */
 
-.main-button {
-    background: #9b7844;
-    color: white;
-    border: none;
-    padding: 13px 27px;
-    border-radius: 30px;
-    font-size: 16px;
-    font-family: Georgia, serif;
-    cursor: pointer;
-    margin-top: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.panel {
+  width: min(830px, 100%);
+  padding: clamp(28px, 6vw, 58px);
+  margin: auto;
 }
 
-.main-button:hover {
-    background: #806035;
+.hero {
+  min-height: 85vh;
+  display: grid;
+  place-items: center;
+  padding: 55px 16px;
 }
 
-/* =========================
-   INVITACIÓN PRINCIPAL
-========================= */
-
-.invitation-card {
-    width: min(650px, 96%);
-    padding: 35px 24px;
-    background: rgba(255,255,255,0.84);
-    border: 1px solid #c5a66c;
-    border-radius: 15px;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+.date {
+  font: 12px Arial;
+  letter-spacing: 2px;
+  color: #927943;
+  margin: 24px 0;
 }
 
-.invitation-card .eyebrow {
-    font-size: 16px;
-    letter-spacing: 4px;
-    color: #a48650;
-    margin-bottom: 20px;
+section.content {
+  padding: 55px 16px;
 }
 
-.invitation-card h1 {
-    color: #96713c;
-    font-size: clamp(32px, 7vw, 48px);
-    font-weight: normal;
-    margin-bottom: 8px;
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 28px 0;
 }
 
-.invitation-card h2 {
-    font-size: 23px;
-    color: #80613a;
-    font-weight: normal;
-    margin-bottom: 22px;
+.detail {
+  padding: 22px 12px;
+  border-top: 1px solid #c9b579;
+  border-bottom: 1px solid #c9b579;
 }
 
-.invitation-card p {
-    font-size: 17px;
-    line-height: 1.7;
-    margin: 12px 0;
+.detail strong {
+  display: block;
+  font: 11px Arial;
+  letter-spacing: 2px;
+  color: #927943;
+  margin-bottom: 12px;
 }
 
-.gold-line {
-    width: 100px;
-    height: 1px;
-    background: #c5a66c;
-    margin: 22px auto;
-}
-
-.event-section {
-    margin: 22px 0;
-}
-
-.event-section h3 {
-    font-size: 21px;
-    color: #987541;
-    font-weight: normal;
-    margin-bottom: 10px;
-}
-
-.event-section p {
-    margin: 5px 0;
-}
-
-.parents {
-    margin-top: 25px;
-    font-size: 16px;
-    line-height: 1.8;
+.detail p {
+  font-size: 16px;
 }
 
 .countdown {
-    margin: 25px 0;
-    padding: 15px;
-    background: rgba(232, 218, 190, 0.55);
-    border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 25px 0;
 }
 
-.countdown h3 {
-    color: #987541;
-    font-weight: normal;
-    margin-bottom: 10px;
+.unit {
+  min-width: 72px;
+  padding: 13px 9px;
+  border: 1px solid #d2c18f;
+  background: #fffaf0;
 }
 
-#timer {
-    font-size: 20px;
-    color: #80613a;
-    line-height: 1.6;
+.unit b {
+  display: block;
+  font-size: 28px;
+  font-weight: normal;
+  color: #8a713c;
 }
 
-.rsvp {
-    margin-top: 25px;
+.unit small {
+  font: 10px Arial;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.rsvp a {
-    display: inline-block;
-    background: #71845d;
-    color: white;
-    text-decoration: none;
-    padding: 13px 25px;
-    border-radius: 30px;
-    margin-top: 12px;
-    font-size: 16px;
+.parents span {
+  display: block;
+  font-size: 18px;
+  line-height: 1.9;
 }
 
-.rsvp a:hover {
-    background: #5b7049;
+footer {
+  text-align: center;
+  padding: 35px 16px;
+  color: #8c7749;
 }
 
-.footer {
-    margin-top: 25px;
-    font-style: italic;
-    color: #8b7047;
-    line-height: 1.6;
-}
+@media(max-width:560px) {
+  .two {
+    grid-template-columns: 1fr;
+  }
 
-/* =========================
-   DISEÑO PARA CELULARES
-========================= */
+  .env-flap {
+    border-left-width: 41vw;
+    border-right-width: 41vw;
+  }
 
-@media (max-width: 480px) {
-    .screen {
-        padding: 18px 12px;
-    }
+  .env-body:before {
+    border-width: 0 41vw 120px 0;
+  }
 
-    .invitation-card {
-        padding: 27px 17px;
-    }
-
-    .invitation-card p {
-        font-size: 16px;
-    }
-
-    .music-button {
-        font-size: 16px;
-        padding: 13px 25px;
-    }
+  .env-body:after {
+    border-width: 0 0 120px 41vw;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- MÚSICA -->
-<audio id="backgroundMusic" preload="none">
-    <source src="assets/musica.mp3" type="audio/mpeg">
-    Tu navegador no admite audio.
-</audio>
+<!-- CANCIÓN -->
+<audio id="song" src="assets/musica.mp3" preload="none" loop></audio>
 
-<!-- PANTALLA 1: SOBRE -->
-<section id="screen1" class="screen active">
+<!-- PRIMERA PANTALLA: SOBRE -->
 
-    <div class="envelope" onclick="openEnvelope()">
-        <h1>Mi Primera Comunión</h1>
-        <p>Una celebración especial</p>
-        <div class="open-text">TOCA PARA ABRIR</div>
+<section class="screen" id="envelopeScreen">
+
+  <div class="envelope-wrap">
+
+    <div class="eyebrow">Una invitación especial</div>
+
+    <div class="ornament">✧</div>
+
+    <div class="envelope-title">
+      Con cariño para ti
     </div>
 
-</section>
+    <div class="envelope" id="envelope"
+         role="button" tabindex="0">
 
-<!-- PANTALLA 2: NOMBRE -->
-<section id="screen2" class="screen">
+      <div class="env-body"></div>
 
-    <div class="name-card">
+      <div class="env-label">
+        Mi Primera<br>Comunión
+      </div>
 
-        <div class="small-title">MI PRIMERA COMUNIÓN</div>
+      <div class="env-flap"></div>
 
-        <h1>Santiago Andrés</h1>
-        <h2>Ortega Lozano</h2>
-
-        <!-- BOTÓN DE MÚSICA JUSTO DEBAJO DEL NOMBRE -->
-        <div class="music-container">
-            <button
-                id="musicButton"
-                class="music-button"
-                onclick="toggleMusic()">
-                🎵 Escuchar música
-            </button>
-        </div>
-
-        <p style="font-size:16px; line-height:1.6;">
-            Con mucha alegría quiero compartir contigo
-            este momento tan especial de mi vida.
-        </p>
-
-        <button class="main-button" onclick="showInvitation()">
-            Ver invitación
-        </button>
+      <div class="seal">✧</div>
 
     </div>
 
+    <div class="hint">
+      Toca el sobre para abrir tu invitación
+    </div>
+
+  </div>
+
 </section>
 
-<!-- PANTALLA 3: INVITACIÓN COMPLETA -->
-<section id="screen3" class="screen">
+<!-- SEGUNDA PANTALLA: SANTIAGO ANDRÉS -->
 
-    <div class="invitation-card">
+<section class="screen hidden" id="nameScreen">
 
-        <div class="eyebrow">CON LA BENDICIÓN DE DIOS</div>
+  <div class="glass panel">
 
-        <h1>Santiago Andrés</h1>
-        <h2>Ortega Lozano</h2>
+    <div class="eyebrow">Con la bendición de Dios</div>
 
-        <p>
-            Tenemos el gusto de invitarte a compartir
-            la alegría de recibir por primera vez a Jesús
-            en mi corazón.
-        </p>
+    <div class="ornament">✧</div>
 
-        <div class="gold-line"></div>
+    <div class="eyebrow">Celebro con alegría</div>
 
-        <div class="event-section">
-            <h3>✝ Santa Eucaristía</h3>
-            <p><strong>8 de diciembre de 2026</strong></p>
-            <p>10:00 de la mañana</p>
-            <p>Parroquia Nuestra Señora del Rosario</p>
-            <p>Río de Oro, Cesar</p>
-        </div>
+    <h1>Santiago Andrés</h1>
 
-        <div class="gold-line"></div>
+    <h2>Ortega Lozano</h2>
 
-        <div class="event-section">
-            <h3>Celebración</h3>
-            <p><strong>8 de diciembre de 2026</strong></p>
-            <p>4:00 de la tarde</p>
-        </div>
+    <button class="music" id="musicBtn">
+      ▶ Reproducir música
+    </button>
 
-        <div class="gold-line"></div>
+    <div class="line"></div>
 
-        <div class="parents">
-            <p>Con amor, mis padres</p>
-            <p><strong>Carlos Andrés Ortega Lozano</strong></p>
-            <p><strong>Yulissa Tatiana Lozano Manosalva</strong></p>
-        </div>
+    <p>
+      Me llena de ilusión compartir contigo
+      este encuentro tan especial con Jesús.
+    </p>
 
-        <div class="countdown">
-            <h3>Faltan para este día especial</h3>
-            <div id="timer">Calculando...</div>
-        </div>
+    <button class="btn" id="showInvite">
+      Ver invitación
+    </button>
 
-        <div class="rsvp">
-            <p>
-                Agradecemos confirmar tu asistencia
-                antes del <strong>30 de noviembre de 2026</strong>,
-                para una mejor organización de este día tan especial.
-            </p>
+  </div>
 
-            <a
-                href="https://wa.me/573102127312?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20la%20Primera%20Comuni%C3%B3n%20de%20Santiago%20Andr%C3%A9s."
-                target="_blank"
-                rel="noopener">
-                Confirmar asistencia por WhatsApp
-            </a>
-        </div>
+</section>
 
-        <div class="footer">
-            <p>
-                “Dejen que los niños vengan a mí”.
-                <br>
-                Mateo 19, 14
-            </p>
-            <p>¡Será una alegría contar con tu presencia!</p>
-        </div>
+<!-- RESTO DE LA INVITACIÓN -->
+
+<main id="invitation" class="hidden">
+
+  <section class="hero">
+
+    <div class="glass panel">
+
+      <div class="eyebrow">Un encuentro con Jesús</div>
+
+      <div class="ornament">✧</div>
+
+      <h1>Mi Primera<br>Comunión</h1>
+
+      <h2>Santiago Andrés Ortega Lozano</h2>
+
+      <div class="date">
+        MARTES · 8 DE DICIEMBRE · 2026
+      </div>
+
+      <p>
+        Con mucha alegría en mi corazón,
+        quiero compartir contigo el día en que
+        recibiré por primera vez a Jesús en la
+        Sagrada Eucaristía. Será una dicha contar
+        con tu presencia y tus oraciones.
+      </p>
+
+      <div class="line"></div>
+
+      <div class="eyebrow">Cuenta regresiva</div>
+
+      <div class="countdown" id="countdown"></div>
 
     </div>
 
-</section>
+  </section>
+
+  <!-- EVENTO -->
+
+  <section class="content">
+
+    <div class="glass panel">
+
+      <div class="eyebrow">El gran día</div>
+
+      <h2>La celebración</h2>
+
+      <div class="two">
+
+        <div class="detail">
+
+          <strong>Santa Eucaristía</strong>
+
+          <p>Martes, 8 de diciembre de 2026</p>
+
+          <p><b>10:00 a. m.</b></p>
+
+          <p>
+            Parroquia Nuestra Señora del Rosario<br>
+            Río de Oro
+          </p>
+
+        </div>
+
+        <div class="detail">
+
+          <strong>Recepción</strong>
+
+          <p>Martes, 8 de diciembre de 2026</p>
+
+          <p><b>4:00 p. m.</b></p>
+
+          <p>
+            Será un gusto compartir
+            este día contigo.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PADRES -->
+
+  <section class="content">
+
+    <div class="glass panel">
+
+      <div class="eyebrow">Con amor y gratitud</div>
+
+      <div class="ornament">✧</div>
+
+      <h2>Mis padres</h2>
+
+      <p>
+        Quienes acompañan con amor y alegría
+        este paso tan importante en mi vida:
+      </p>
+
+      <div class="parents">
+
+        <span>Carlos Andrés Ortega Lozano</span>
+
+        <span>Yulissa Tatiana Lozano Manosalva</span>
+
+      </div>
+
+      <div class="line"></div>
+
+      <p>
+        «Dejen que los niños se acerquen a mí».<br>
+        <i>Marcos 10, 14</i>
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- CONFIRMAR ASISTENCIA -->
+
+  <section class="content">
+
+    <div class="glass panel">
+
+      <div class="eyebrow">Confirmar asistencia</div>
+
+      <h2>Tu presencia es muy especial</h2>
+
+      <p>
+        Para una mejor organización y por consideración
+        a la logística de la celebración, agradecemos
+        confirmar tu asistencia a más tardar el
+        <b>30 de noviembre de 2026</b>.
+      </p>
+
+      <p>
+        Tu confirmación nos permitirá preparar
+        cada detalle con el cariño que esta ocasión merece.
+      </p>
+
+      <p>
+        Gracias por acompañarme en este hermoso
+        encuentro con Jesús.
+      </p>
+
+      <a class="btn" id="whatsapp"
+         target="_blank" rel="noopener">
+        Confirmar por WhatsApp
+      </a>
+
+    </div>
+
+  </section>
+
+  <footer>
+
+    <div class="ornament">✧</div>
+
+    Santiago Andrés Ortega Lozano<br>
+    8 de diciembre de 2026
+
+    <p>
+      Con la bendición de Dios y el amor de nuestra familia.
+    </p>
+
+    <a href="#envelopeScreen" style="color:inherit">
+      Volver al inicio ↑
+    </a>
+
+  </footer>
+
+</main>
 
 <script>
-/* =========================
-   CAMBIO DE PANTALLAS
-========================= */
+
+// ABRIR SOBRE
+
+const envelope = document.getElementById("envelope");
+
+const envelopeScreen =
+  document.getElementById("envelopeScreen");
+
+const nameScreen =
+  document.getElementById("nameScreen");
+
+const invitation =
+  document.getElementById("invitation");
 
 function openEnvelope() {
-    document.getElementById("screen1").classList.remove("active");
-    document.getElementById("screen2").classList.add("active");
+
+  if (envelope.classList.contains("open")) return;
+
+  envelope.classList.add("open");
+
+  setTimeout(() => {
+
+    envelopeScreen.classList.add("hidden");
+
+    nameScreen.classList.remove("hidden");
+
+    nameScreen.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }, 850);
+
 }
 
-function showInvitation() {
-    document.getElementById("screen2").classList.remove("active");
-    document.getElementById("screen3").classList.add("active");
-}
+envelope.addEventListener("click", openEnvelope);
 
-/* =========================
-   CONTROL DE MÚSICA
-========================= */
+envelope.addEventListener("keydown", e => {
 
-const music = document.getElementById("backgroundMusic");
-const musicButton = document.getElementById("musicButton");
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    openEnvelope();
+  }
 
-async function toggleMusic() {
-    if (music.paused) {
-        try {
-            await music.play();
-            musicButton.textContent = "⏸ Pausar música";
-        } catch (error) {
-            musicButton.textContent = "🎵 No se pudo reproducir";
-        }
-    } else {
-        music.pause();
-        musicButton.textContent = "🎵 Escuchar música";
-    }
-}
-
-music.addEventListener("ended", function() {
-    musicButton.textContent = "🎵 Escuchar música";
 });
 
-/* =========================
-   CUENTA REGRESIVA
-========================= */
+// MOSTRAR INVITACIÓN
 
-function updateCountdown() {
-    const eventDate = new Date("2026-12-08T10:00:00-05:00");
-    const now = new Date();
-    const difference = eventDate.getTime() - now.getTime();
+document.getElementById("showInvite")
+.addEventListener("click", () => {
 
-    const timer = document.getElementById("timer");
+  nameScreen.classList.add("hidden");
 
-    if (difference <= 0) {
-        timer.textContent = "¡Llegó el gran día!";
-        return;
+  invitation.classList.remove("hidden");
+
+  invitation.scrollIntoView({
+    behavior: "smooth"
+  });
+
+});
+
+// REPRODUCIR Y PAUSAR MÚSICA
+
+const song = document.getElementById("song");
+
+const musicBtn = document.getElementById("musicBtn");
+
+musicBtn.addEventListener("click", async () => {
+
+  if (song.paused) {
+
+    try {
+
+      await song.play();
+
+      musicBtn.textContent = "Ⅱ Pausar música";
+
+    } catch (error) {
+
+      musicBtn.textContent = "No se pudo reproducir";
+
     }
 
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-        (difference / (1000 * 60 * 60)) % 24
-    );
-    const minutes = Math.floor(
-        (difference / (1000 * 60)) % 60
-    );
-    const seconds = Math.floor(
-        (difference / 1000) % 60
-    );
+  } else {
 
-    timer.textContent =
-        days + " días · " +
-        hours + " horas · " +
-        minutes + " minutos · " +
-        seconds + " segundos";
+    song.pause();
+
+    musicBtn.textContent = "▶ Reproducir música";
+
+  }
+
+});
+
+// CUENTA REGRESIVA
+
+const eventDate =
+  new Date("2026-12-08T10:00:00-05:00").getTime();
+
+const countdown =
+  document.getElementById("countdown");
+
+function updateCountdown() {
+
+  const diff = eventDate - Date.now();
+
+  if (diff <= 0) {
+
+    countdown.innerHTML =
+      "<p>¡Hoy es el gran día!</p>";
+
+    return;
+
+  }
+
+  const values = [
+
+    Math.floor(diff / 86400000),
+
+    Math.floor(diff % 86400000 / 3600000),
+
+    Math.floor(diff % 3600000 / 60000),
+
+    Math.floor(diff % 60000 / 1000)
+
+  ];
+
+  const labels = [
+    "Días",
+    "Horas",
+    "Minutos",
+    "Segundos"
+  ];
+
+  countdown.innerHTML = values.map((value, i) => `
+
+    <div class="unit">
+
+      <b>${String(value).padStart(2, "0")}</b>
+
+      <small>${labels[i]}</small>
+
+    </div>
+
+  `).join("");
+
 }
 
 updateCountdown();
+
 setInterval(updateCountdown, 1000);
+
+// WHATSAPP
+
+const message =
+  "¡Hola! Confirmo mi asistencia a la Primera Comunión de Santiago Andrés Ortega Lozano, el 8 de diciembre de 2026. Nombre(s) de los asistentes: ";
+
+document.getElementById("whatsapp").href =
+  "https://wa.me/573102127312?text=" +
+  encodeURIComponent(message);
+
 </script>
 
 </body>
